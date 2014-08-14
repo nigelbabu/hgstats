@@ -32,6 +32,12 @@
         <ul></ul>
       </nav>
       <section>
+        <h3><a name="health-report" class="anchor"
+                href="#health-report"><span class="octicon
+                    octicon-link"></span></a>Health Report</h3>
+          <img src="https://graphite.mozilla.org/render/?width=586&height=308&_salt=1408051397.081&from=-2hours&target=secondYAxis(sumSeries(removeBelowValue(hosts.hgweb*_dmz_scl3_mozilla_com.apache.apache80.apache_bytes.count%2C0)))&target=sumSeries(removeAboveValue(hosts.hgweb*_dmz_scl3_mozilla_com.apache.apache80.apache_requests.count%2C100000))&target=averageSeries(hosts.hgweb*_dmz_scl3_mozilla_com.cpu.*.cpu.idle.value)&target=secondYAxis(averageSeries(hosts.hgweb*_dmz_scl3_mozilla_com.swap.swap.used.value))&hideLegend=true" />
+          <p>Red is %idle CPU, so down is bad.</p>
+
         <h3><a name="cpu-usage" class="anchor" href="#cpu-usage"><span class="octicon octicon-link"></span></a>CPU Usage</h3>
           <img src="https://graphite.mozilla.org/render?from=-2hours&until=now&width=400&height=250&_salt=1408036085.026&target=hosts.hgweb*_dmz_scl3_mozilla_com.cpu.*.cpu.user.value&title=CPU%20Usage%20%28user%25%29&_uniq=0.3305984930202769" />
 
