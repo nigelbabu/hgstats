@@ -85,9 +85,7 @@
           hours = 2;
         }
         dispatcher.trigger('render', hours);
-        setInterval(function() {
-          dispatcher.trigger('render', hours);
-        }, 1000 * 60 * 5);
+        setInterval(_.partial(dispatcher.trigger.bind(dispatcher), 'render', hours), 1000 * 60 * 5);
     });
     app.on('route:defaultRoute', function (actions) {
         app.navigate("hours/2", {trigger: true, replace: true});
