@@ -33,6 +33,25 @@
         <ul></ul>
       </nav>
       <section>
+        <h3><a name="health-report" class="anchor"
+                href="#health-report"><span class="octicon
+                    octicon-link"></span></a>Health Report</h3>
+          <img width="586px" height="308px" src="https://graphite.mozilla.org/render/?width=586&height=308&_salt=1408051397.081&from=-2hours&target=secondYAxis(sumSeries(removeBelowValue(hosts.hgweb*_dmz_scl3_mozilla_com.apache.apache80.apache_bytes.count%2C0)))&target=sumSeries(removeAboveValue(hosts.hgweb*_dmz_scl3_mozilla_com.apache.apache80.apache_requests.count%2C100000))&target=averageSeries(hosts.hgweb*_dmz_scl3_mozilla_com.cpu.*.cpu.idle.value)&target=secondYAxis(averageSeries(hosts.hgweb*_dmz_scl3_mozilla_com.swap.swap.used.value))&hideLegend=true" />
+          <table>
+              <caption>Consolidated across all cpu cores and webheads</caption>
+              <tr>
+                  <th>Left Scale</th>
+                  <th>Right Scale</th>
+              </tr>
+            <tr>
+                <td>Red is %idle CPU, so down is bad.</td>
+                <td>Magenta is swap used, so up is bad.</td>
+            </tr>
+            <tr>
+                <td>Green is http request count.</td>
+                <td>Blue is http response bytes.</td>
+            </tr>
+        </table>
       </section>
       <footer>
         <p>Project maintained by <a href="https://github.com/nigelbabu">nigelbabu</a></p>

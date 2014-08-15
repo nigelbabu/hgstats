@@ -16,7 +16,7 @@ GraphView = Backbone.View.extend({
     }
 });
 var cpu_usage_view = new GraphView({ el: $("section"), name: 'cpu-usage', title: 'CPU Usage', url: cpu_usage_url({hours: 2}) });
-var apache_requests_view = new GraphView({ el: $("section"), name: 'apache-requests', title: 'Apache Requests', url: cpu_usage_url({hours: 2}) });
-var load_average_view = new GraphView({ el: $("section"), name: 'load-average', title: 'Load Average', url: cpu_usage_url({hours: 2}) });
-var network_traffic_view = new GraphView({ el: $("section"), name: 'network-traffic', title: 'Network Traffic', url: cpu_usage_url({hours: 2}) });
-var swap_usage_view = new GraphView({ el: $("section"), name: 'swap-usage', title: 'Swap Usage', url: cpu_usage_url({hours: 2}) });
+var apache_requests_view = new GraphView({ el: $("section"), name: 'apache-requests', title: 'Apache Requests', url: apache_requests({hours: 2}) });
+var load_average_view = new GraphView({ el: $("section"), name: 'load-average', title: 'Load Average', url: load_average({hours: 2}) });
+var network_traffic_view = new GraphView({ el: $("section"), name: 'network-traffic', title: 'Network Traffic', url: network_traffic({hours: 2}) });
+var swap_usage_view = new GraphView({ el: $("section"), name: 'swap-usage', title: 'Swap Usage', url: swap_usage({hours: 2}) });
