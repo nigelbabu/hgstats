@@ -2,7 +2,7 @@
     // Model to hold graph data
     GraphModel = Backbone.Model.extend({});
 
-    // Define objects
+    // Define individual graphs
     var cpu_usage = new GraphModel({
       name: 'cpu-usage',
       title: 'CPU Usage',
@@ -43,7 +43,22 @@
           return this;
       }
     });
+    // Dispatcher
+    var dispatcher = _.clone(Backbone.Events);
 
+    dispatcher.on("render", function(hours) {
+        console.log(hours);
+        var health_report_view = new HealthReportView({ el: $("section"), hours: hours});
+        graphs = graphs.map(function(value, key, list) {
+          value.set('url', value.get('url_template')({hours: hours}));
+          return value;
+        });
+        graphs.forEach(function(element, index, list) {
+          new GraphView({ el: $("section"), model: element});
+        });
+    });
+
+    // Health Report gets it's own view for now
     HealthReportView = Backbone.View.extend({
     initialize: function(options) {
       this.options = options;
@@ -56,6 +71,7 @@
       }
     });
 
+    // Initialize the router
     var AppRouter = Backbone.Router.extend({
         routes: {
             "hours/:id": "getGraphs",
@@ -68,14 +84,10 @@
         if (isNaN(hours)) {
           hours = 2;
         }
-        var health_report_view = new HealthReportView({ el: $("section"), hours: hours});
-        graphs = graphs.map(function(value, key, list) {
-          value.set('url', value.get('url_template')({hours: hours}));
-          return value;
-        });
-        graphs.forEach(function(element, index, list) {
-          new GraphView({ el: $("section"), model: element});
-        });
+        dispatcher.trigger('render', hours);
+        setInterval(function() {
+          dispatcher.trigger('render', hours);
+        }, 1000 * 60 * 5);
     });
     app.on('route:defaultRoute', function (actions) {
         app.navigate("hours/2", {trigger: true, replace: true});
