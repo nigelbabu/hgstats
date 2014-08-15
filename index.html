@@ -6,13 +6,14 @@
     <title>Hgstats by nigelbabu</title>
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/main.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
+    <script type="text/template" id="graph_template">
+      <h3><a name="<%= name %>" class="anchor" href="#<%= name %>"><span class="octicon octicon-link"></span></a><%= title %></h3>
+        <img src="<%= url %>" />
+    </script>
   </head>
   <body>
 
@@ -32,23 +33,6 @@
         <ul></ul>
       </nav>
       <section>
-        <h3><a name="cpu-usage" class="anchor" href="#cpu-usage"><span class="octicon octicon-link"></span></a>CPU Usage</h3>
-          <img src="https://graphite.mozilla.org/render?from=-2hours&until=now&width=400&height=250&_salt=1408036085.026&target=hosts.hgweb*_dmz_scl3_mozilla_com.cpu.*.cpu.user.value&title=CPU%20Usage%20%28user%25%29&_uniq=0.3305984930202769" />
-
-        <h3><a name="apache-requests" class="anchor" href="#apache-requests"><span class="octicon octicon-link"></span></a>In-flight Apache Requests</h3>
-          <img src="https://graphite.mozilla.org/render?from=-2hours&until=now&width=400&height=250&_salt=1408009636.045&target=hosts.hgweb*_dmz_scl3_mozilla_com.apache.apache80.apache_scoreboard.sending.count&title=In-flight%20Apache%20Requests&hideLegend=true&_uniq=0.6127992861238261" />
-
-          <h3><a name="cpu-usage" class="anchor" href="#cpu-usage"><span class="octicon octicon-link"></span></a>CPU Usage</h3>
-          <img src="https://graphite.mozilla.org/render?from=-2hours&until=now&width=400&height=250&_salt=1408036085.026&target=hosts.hgweb*_dmz_scl3_mozilla_com.cpu.*.cpu.user.value&title=CPU%20Usage%20%28user%25%29&_uniq=0.3305984930202769" />
-
-          <h3><a name="load-average" class="anchor" href="#load-average"><span class="octicon octicon-link"></span></a>Load Average</h3>
-          <img src="https://graphite.mozilla.org/render?from=-3hours&until=now&width=400&height=250&_salt=1363655220.184&target=hosts.hgweb*_dmz_scl3_mozilla_com.load.load.shortterm&title=Loadavg&hideLegend=true&_uniq=0.6604602754241492" />
-
-          <h3><a name="network-traffic" class="anchor" href="#network-traffic"><span class="octicon octicon-link"></span></a>Outbound Network Traffic</h3>
-          <img src="https://graphite.mozilla.org/render?from=-2hours&until=now&width=400&height=250&_salt=1408010393.594&yMax=&yMin=&target=sumSeries%28hosts.hgweb*_dmz_scl3_mozilla_com.interface.if_octets.bond0.tx%29&title=Outbound%20Network%20Traffic&hideLegend=true&_uniq=0.8170505894781112" />
-
-          <h3><a name="swap-usage" class="anchor" href="#swap-usage"><span class="octicon octicon-link"></span></a>Swap Usage</h3>
-          <img src="https://graphite.mozilla.org/render?from=-2hours&until=now&width=400&height=250&_salt=1408010128.676&yMax=&yMin=&target=hosts.hgweb*_dmz_scl3_mozilla_com.swap.swap.used.value&title=Swap%20Usage&hideLegend=true&_uniq=0.8308034549876273" />
       </section>
       <footer>
         <p>Project maintained by <a href="https://github.com/nigelbabu">nigelbabu</a></p>
@@ -56,6 +40,10 @@
       </footer>
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/underscore.js"></script>
+    <script src="javascripts/backbone.js"></script>
+    <script src="javascripts/main.js"></script>
+    <script src="javascripts/app.js"></script>
   </body>
 </html>
