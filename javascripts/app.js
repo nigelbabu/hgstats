@@ -52,6 +52,20 @@
                                   "Swap%20Usage",
                                   true),
       }),
+      new GraphModel({
+        name: 'disk-read-bytes',
+        title: 'Disk Read Bytes',
+        url_template: urlTemplate("hosts.hgweb*_dmz_scl3_mozilla_com.disk.sda.disk_octets.read",
+                                  "Bytes%20Read",
+                                  true),
+      }),
+      new GraphModel({
+        name: 'disk-write-bytes',
+        title: 'Disk Write Bytes',
+        url_template: urlTemplate("hosts.hgweb*_dmz_scl3_mozilla_com.disk.sda.disk_octets.write",
+                                  "Bytes%20Written",
+                                  true),
+      }),
     ];
 
     // Collection
