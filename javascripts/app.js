@@ -2,31 +2,54 @@
     // Model to hold graph data
     GraphModel = Backbone.Model.extend({});
 
+    function urlTemplate(target, title, hideLegend) {
+      var url = "https://graphite.mozilla.org/render?from=-<%= hours %>hours&until=now&width=586&height=308";
+      url += "&_salt=" + Date.now() / 10;
+      url += "&_uniq=" + Math.random();
+
+      url += "&target=" + target;
+      url += "&title=" + title;
+      if (hideLegend) {
+        url += "&hideLegend=true";
+      }
+
+      return _.template(url);
+    }
+
     // Define individual graphs
     var cpu_usage = new GraphModel({
       name: 'cpu-usage',
       title: 'CPU Usage',
-      url_template: _.template("https://graphite.mozilla.org/render?from=-<%= hours %>hours&until=now&width=586&height=308&_salt=1408036085.026&target=hosts.hgweb*_dmz_scl3_mozilla_com.cpu.*.cpu.user.value&title=CPU%20Usage%20%28user%25%29&_uniq=0.3305984930202769")
+      url_template: urlTemplate("hosts.hgweb*_dmz_scl3_mozilla_com.cpu.*.cpu.user.value",
+                                "CPU%20Usage%20%28user%25%29"),
     });
     var apache_requests = new GraphModel({
       name: 'apache-requests',
       title: 'Apache Requests',
-      url_template: _.template("https://graphite.mozilla.org/render?from=-<%= hours %>hours&until=now&width=586&height=308&_salt=1408009636.045&target=hosts.hgweb*_dmz_scl3_mozilla_com.apache.apache80.apache_scoreboard.sending.count&title=In-flight%20Apache%20Requests&hideLegend=true&_uniq=0.6127992861238261")
+      url_template: urlTemplate("hosts.hgweb*_dmz_scl3_mozilla_com.apache.apache80.apache_scoreboard.sending.count",
+                                "In-flight%20Apache%20Requests",
+                                true),
     });
     var load_average = new GraphModel({
       name: 'load-average',
       title: 'Load Average',
-      url_template: _.template("https://graphite.mozilla.org/render?from=-<%= hours %>hours&until=now&width=586&height=308&_salt=1363655220.184&target=hosts.hgweb*_dmz_scl3_mozilla_com.load.load.shortterm&title=Loadavg&hideLegend=true&_uniq=0.6604602754241492")
+      url_template: urlTemplate("hosts.hgweb*_dmz_scl3_mozilla_com.load.load.shortterm",
+                                "Loadavg",
+                                true),
     });
     var network_traffic = new GraphModel({
       name: 'network-traffic',
       title: 'Network Traffic',
-      url_template: _.template("https://graphite.mozilla.org/render?from=-<%= hours %>hours&until=now&width=586&height=308&_salt=1408010393.594&yMax=&yMin=&target=sumSeries%28hosts.hgweb*_dmz_scl3_mozilla_com.interface.if_octets.bond0.tx%29&title=Outbound%20Network%20Traffic&hideLegend=true&_uniq=0.8170505894781112")
+      url_template: urlTemplate("sumSeries%28hosts.hgweb*_dmz_scl3_mozilla_com.interface.if_octets.bond0.tx%29",
+                                "Outbound%20Network%20Traffic",
+                                true),
     });
     var swap_usage = new GraphModel({
       name: 'swap-usage',
       title: 'Swap Usage',
-      url_template: _.template("https://graphite.mozilla.org/render?from=-<%= hours %>hours&until=now&width=586&height=308&_salt=1408010128.676&yMax=&yMin=&target=hosts.hgweb*_dmz_scl3_mozilla_com.swap.swap.used.value&title=Swap%20Usage&hideLegend=true&_uniq=0.8308034549876273")
+      url_template: urlTemplate("hosts.hgweb*_dmz_scl3_mozilla_com.swap.swap.used.value",
+                                "Swap%20Usage",
+                                true),
     });
 
     // Collection
