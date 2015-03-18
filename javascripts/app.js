@@ -17,43 +17,45 @@
     }
 
     // Define individual graphs
-    var cpu_usage = new GraphModel({
-      name: 'cpu-usage',
-      title: 'CPU Usage',
-      url_template: urlTemplate("hosts.hgweb*_dmz_scl3_mozilla_com.cpu.*.cpu.user.value",
-                                "CPU%20Usage%20%28user%25%29"),
-    });
-    var apache_requests = new GraphModel({
-      name: 'apache-requests',
-      title: 'Apache Requests',
-      url_template: urlTemplate("hosts.hgweb*_dmz_scl3_mozilla_com.apache.apache80.apache_scoreboard.sending.count",
-                                "In-flight%20Apache%20Requests",
-                                true),
-    });
-    var load_average = new GraphModel({
-      name: 'load-average',
-      title: 'Load Average',
-      url_template: urlTemplate("hosts.hgweb*_dmz_scl3_mozilla_com.load.load.shortterm",
-                                "Loadavg",
-                                true),
-    });
-    var network_traffic = new GraphModel({
-      name: 'network-traffic',
-      title: 'Network Traffic',
-      url_template: urlTemplate("sumSeries%28hosts.hgweb*_dmz_scl3_mozilla_com.interface.if_octets.bond0.tx%29",
-                                "Outbound%20Network%20Traffic",
-                                true),
-    });
-    var swap_usage = new GraphModel({
-      name: 'swap-usage',
-      title: 'Swap Usage',
-      url_template: urlTemplate("hosts.hgweb*_dmz_scl3_mozilla_com.swap.swap.used.value",
-                                "Swap%20Usage",
-                                true),
-    });
+    var graphModels = [
+      new GraphModel({
+        name: 'cpu-usage',
+        title: 'CPU Usage',
+        url_template: urlTemplate("hosts.hgweb*_dmz_scl3_mozilla_com.cpu.*.cpu.user.value",
+                                  "CPU%20Usage%20%28user%25%29"),
+      }),
+      new GraphModel({
+        name: 'apache-requests',
+        title: 'Apache Requests',
+        url_template: urlTemplate("hosts.hgweb*_dmz_scl3_mozilla_com.apache.apache80.apache_scoreboard.sending.count",
+                                  "In-flight%20Apache%20Requests",
+                                  true),
+      }),
+      new GraphModel({
+        name: 'load-average',
+        title: 'Load Average',
+        url_template: urlTemplate("hosts.hgweb*_dmz_scl3_mozilla_com.load.load.shortterm",
+                                  "Loadavg",
+                                  true),
+      }),
+      new GraphModel({
+        name: 'network-traffic',
+        title: 'Network Traffic',
+        url_template: urlTemplate("sumSeries%28hosts.hgweb*_dmz_scl3_mozilla_com.interface.if_octets.bond0.tx%29",
+                                  "Outbound%20Network%20Traffic",
+                                  true),
+      }),
+      new GraphModel({
+        name: 'swap-usage',
+        title: 'Swap Usage',
+        url_template: urlTemplate("hosts.hgweb*_dmz_scl3_mozilla_com.swap.swap.used.value",
+                                  "Swap%20Usage",
+                                  true),
+      }),
+    ];
 
     // Collection
-    var graphs = new Backbone.Collection([cpu_usage, apache_requests, load_average, network_traffic, swap_usage], {model: GraphModel});
+    var graphs = new Backbone.Collection(graphModels, {model: GraphModel});
 
     GraphView = Backbone.View.extend({
       initialize: function(){
