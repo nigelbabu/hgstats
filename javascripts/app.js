@@ -53,6 +53,13 @@
                                   true),
       }),
       new GraphModel({
+        name: 'page-cache',
+        title: 'Page Cache',
+        url_template: urlTemplate("hosts.hgweb*_dmz_scl3_mozilla_com.memory.memory.cached.value",
+                                  "Bytes%20In%20Page%20Cache",
+                                  true),
+      }),
+      new GraphModel({
         name: 'disk-read-bytes',
         title: 'Disk Read Bytes',
         url_template: urlTemplate("hosts.hgweb*_dmz_scl3_mozilla_com.disk.sda.disk_octets.read",
