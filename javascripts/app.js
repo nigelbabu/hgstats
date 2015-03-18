@@ -83,8 +83,8 @@
       new GraphModel({
         name: 'swap-usage',
         title: 'Swap Usage',
-        url_template: urlTemplate("hosts.hgweb*_dmz_scl3_mozilla_com.swap.swap.used.value",
-                                  "Swap%20Usage",
+        url_template: urlTemplate(perHostTargets("sumSeries(hosts.%HOST%.swap.swap_io.in.value,hosts.%HOST%.swap.swap_io.out.value)"),
+                                  "Total%20Swap%20Input%20Output",
                                   true),
       }),
       new GraphModel({
