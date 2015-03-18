@@ -76,8 +76,8 @@
       new GraphModel({
         name: 'network-traffic',
         title: 'Network Traffic',
-        url_template: urlTemplate("sumSeries%28hosts.hgweb*_dmz_scl3_mozilla_com.interface.if_octets.bond0.tx%29",
-                                  "Outbound%20Network%20Traffic",
+        url_template: urlTemplate("scale(sumSeries%28hosts.hgweb*_dmz_scl3_mozilla_com.interface.if_octets.bond0.tx%29,8)",
+                                  "Outbound%20Network%20Traffic%20bps",
                                   true),
       }),
       new GraphModel({
