@@ -15,7 +15,9 @@
       "hgweb10_dmz_scl3_mozilla_com",
     ];
 
-    function urlTemplate(target, title, hideLegend) {
+    function urlTemplate(target, title, hideLegend, extra) {
+      var extra = extra ? extra : {};
+
       var url = "https://graphite.mozilla.org/render?from=-<%= hours %>hours&until=now&width=586&height=308";
       url += "&_salt=" + Date.now() / 10;
       url += "&_uniq=" + Math.random();
@@ -30,6 +32,10 @@
       url += "&title=" + title;
       if (hideLegend) {
         url += "&hideLegend=true";
+      }
+
+      for (var key in extra) {
+        url += "&" + key + "=" + extra[key];
       }
 
       return _.template(url);
@@ -57,7 +63,8 @@
         title: 'CPU Usage',
         url_template: urlTemplate(perHostTargets("absolute(offset(averageSeries(hosts.%HOST%.cpu.*.cpu.idle.value),-100))"),
                                   "CPU%20Usage",
-                                  true),
+                                  true,
+                                  {yMin: 0, yMax: 100}),
       }),
       new GraphModel({
         name: 'apache-requests',
