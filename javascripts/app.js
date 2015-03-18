@@ -2,12 +2,31 @@
     // Model to hold graph data
     GraphModel = Backbone.Model.extend({});
 
+    var hosts = [
+      "hgweb1_dmz_scl3_mozilla_com",
+      "hgweb2_dmz_scl3_mozilla_com",
+      "hgweb3_dmz_scl3_mozilla_com",
+      "hgweb4_dmz_scl3_mozilla_com",
+      "hgweb5_dmz_scl3_mozilla_com",
+      "hgweb6_dmz_scl3_mozilla_com",
+      "hgweb7_dmz_scl3_mozilla_com",
+      "hgweb8_dmz_scl3_mozilla_com",
+      "hgweb9_dmz_scl3_mozilla_com",
+      "hgweb10_dmz_scl3_mozilla_com",
+    ];
+
     function urlTemplate(target, title, hideLegend) {
       var url = "https://graphite.mozilla.org/render?from=-<%= hours %>hours&until=now&width=586&height=308";
       url += "&_salt=" + Date.now() / 10;
       url += "&_uniq=" + Math.random();
 
-      url += "&target=" + target;
+      if (Array.isArray(target)) {
+        for (var t of target) {
+          url += "&target=" + t;
+        }
+      } else {
+        url += "&target=" + target;
+      }
       url += "&title=" + title;
       if (hideLegend) {
         url += "&hideLegend=true";
@@ -16,13 +35,29 @@
       return _.template(url);
     }
 
+    /**
+     * Obtain an array of target strings for each host in the cluster.
+     *
+     * The string "%HOST%" in the target string will be replaced with the host.
+     */
+    function perHostTargets(target) {
+      var targets = [];
+      for (var host of hosts) {
+        var t = target.replace("%HOST%", host);
+        targets.push(t);
+      }
+
+      return targets;
+    }
+
     // Define individual graphs
     var graphModels = [
       new GraphModel({
         name: 'cpu-usage',
         title: 'CPU Usage',
-        url_template: urlTemplate("hosts.hgweb*_dmz_scl3_mozilla_com.cpu.*.cpu.user.value",
-                                  "CPU%20Usage%20%28user%25%29"),
+        url_template: urlTemplate(perHostTargets("absolute(offset(averageSeries(hosts.%HOST%.cpu.*.cpu.idle.value),-100))"),
+                                  "CPU%20Usage",
+                                  true),
       }),
       new GraphModel({
         name: 'apache-requests',
