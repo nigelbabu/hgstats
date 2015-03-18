@@ -81,6 +81,13 @@
                                   true),
       }),
       new GraphModel({
+        name: 'network-out-individual',
+        title: 'Individual Host Network Traffic',
+        url_template: urlTemplate(perHostTargets("scale(hosts.%HOST%.interface.if_octets.bond0.tx,8)"),
+                                  "Outbound%20Network%20Traffic%20bps",
+                                  true),
+      }),
+      new GraphModel({
         name: 'swap-usage',
         title: 'Swap Usage',
         url_template: urlTemplate(perHostTargets("sumSeries(hosts.%HOST%.swap.swap_io.in.value,hosts.%HOST%.swap.swap_io.out.value)"),
