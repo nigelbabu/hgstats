@@ -17,7 +17,7 @@
     <script type="text/template" id="health_report">
       <h3><a name="health-report" class="anchor"
               href="#health-report"><span class="octicon octicon-link"></span></a>Health Report</h3>
-            <img width="586px" height="308px" src="https://graphite.mozilla.org/render/?width=586&height=308&_salt=1417561607.994&from=-<%= hours %>hours&target=secondYAxis(sumSeries(removeBelowValue(hosts.hgweb*_dmz_scl3_mozilla_com.apache.apache80.apache_bytes.count%2C0)))&target=sumSeries(removeAboveValue(hosts.hgweb*_dmz_scl3_mozilla_com.apache.apache80.apache_requests.count%2C100000))&target=averageSeries(hosts.hgweb*_dmz_scl3_mozilla_com.cpu.*.cpu.idle.value)&target=secondYAxis(averageSeries(hosts.hgweb*_dmz_scl3_mozilla_com.swap.swap.used.value))&target=scale(test.hwine.hgssh1.push_queue.try.depth%2c10.0)&hideLegend=true" />
+            <img width="586px" height="308px" src="https://graphite-scl3.mozilla.org/render/?width=586&height=308&_salt=1417561607.994&from=-<%= hours %>hours&target=secondYAxis(sumSeries(removeBelowValue(hosts.hgweb*_dmz_scl3_mozilla_com.apache.apache80.apache_bytes.count%2C0)))&target=sumSeries(removeAboveValue(hosts.hgweb*_dmz_scl3_mozilla_com.apache.apache80.apache_requests.count%2C100000))&target=averageSeries(hosts.hgweb*_dmz_scl3_mozilla_com.cpu.*.cpu.idle.value)&target=secondYAxis(averageSeries(hosts.hgweb*_dmz_scl3_mozilla_com.swap.swap.used.value))&target=scale(test.hwine.hgssh1.push_queue.try.depth%2c10.0)&hideLegend=true" />
         <table>
             <caption>Consolidated across all cpu cores and webheads</caption>
             <tr>

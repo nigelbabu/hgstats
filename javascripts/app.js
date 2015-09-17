@@ -18,7 +18,7 @@
     function urlTemplate(target, title, hideLegend, extra) {
       var extra = extra ? extra : {};
 
-      var url = "https://graphite.mozilla.org/render?from=-<%= hours %>hours&until=now&width=586&height=308";
+      var url = "https://graphite-scl3.mozilla.org/render?from=-<%= hours %>hours&until=now&width=586&height=308";
       url += "&_salt=" + Date.now() / 10;
       url += "&_uniq=" + Math.random();
 
